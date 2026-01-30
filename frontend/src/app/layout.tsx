@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Exim Royals - Premium Indian Exports",
+  title: "DND Global Exports - Premium Indian Exports",
   description: "Connecting Quality Indian Agro Products to the World",
 };
 

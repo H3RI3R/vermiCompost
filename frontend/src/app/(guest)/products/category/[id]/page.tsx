@@ -43,7 +43,7 @@ export default function CategoryProductsPage() {
                 </div>
                 {/* Optional BG Image overlay if category has one */}
                 {category?.imageUrl && (
-                    <div className="absolute inset-0 opacity-20 bg-cover bg-center" style={{ backgroundImage: `url(http://localhost:8080/uploads/${category.imageUrl})` }}></div>
+                    <div className="absolute inset-0 opacity-20 bg-cover bg-center" style={{ backgroundImage: `url(http://localhost:8080/uploads/${encodeURIComponent(category.imageUrl)})` }}></div>
                 )}
             </div>
 

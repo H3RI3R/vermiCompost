@@ -32,7 +32,7 @@ export default function LoginPage() {
         <div className="min-h-screen flex items-center justify-center bg-gray-50">
             <div className="max-w-md w-full p-8 bg-white rounded-lg shadow-md border border-gray-100">
                 <div className="text-center mb-8">
-                    <h1 className="text-3xl font-bold" style={{ color: 'var(--color-primary)' }}>Exim Royals</h1>
+                    <h1 className="text-3xl font-bold" style={{ color: 'var(--color-primary)' }}>DND Global Exports</h1>
                     <p className="text-gray-500 mt-2">Admin Portal Login</p>
                 </div>
 
@@ -49,7 +49,7 @@ export default function LoginPage() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
-                        placeholder="admin@eximroyals.com"
+                        placeholder="admin@dndglobal.com"
                     />
 
                     <Input

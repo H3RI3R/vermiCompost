@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import api from '@/lib/api';
-import { Search } from 'lucide-react';
+import { Search, ChevronRight } from 'lucide-react';
 
 export default function ProductsPage() {
     const [products, setProducts] = useState<any[]>([]);
@@ -34,19 +34,20 @@ export default function ProductsPage() {
         : products.filter(p => p.category?.id?.toString() === selectedCategory);
 
     return (
-        <div className="bg-gray-50 min-h-screen py-10">
-            <div className="container mx-auto px-4">
-                <div className="text-center mb-10">
-                    <h1 className="text-4xl font-bold text-[#0f3d2e] mb-2">Our Products</h1>
-                    <p className="text-gray-600">Browse our wide range of premium agro-products.</p>
+        <div className="bg-slate-50 min-h-screen py-16">
+            <div className="container mx-auto px-6">
+                <div className="text-center mb-16">
+                    <span className="text-gold font-bold tracking-wider uppercase text-sm mb-2 block">Our Collection</span>
+                    <h1 className="text-4xl md:text-5xl font-serif font-bold text-slate-dark mb-4">Premium Products</h1>
+                    <p className="text-slate-500 max-w-2xl mx-auto text-lg">Browse our wide range of export-quality agro products.</p>
                 </div>
 
                 {/* Filters */}
-                <div className="flex flex-col md:flex-row justify-between items-center bg-white p-4 rounded-lg shadow-sm mb-8">
-                    <div className="flex overflow-x-auto space-x-2 pb-2 md:pb-0 w-full md:w-auto">
+                <div className="flex flex-col md:flex-row justify-center items-center mb-12">
+                    <div className="glass-panel p-2 rounded-full inline-flex flex-wrap justify-center gap-2">
                         <button
                             onClick={() => setSelectedCategory('all')}
-                            className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition ${selectedCategory === 'all' ? 'bg-[#0f3d2e] text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+                            className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${selectedCategory === 'all' ? 'bg-primary text-white shadow-lg' : 'text-slate-500 hover:text-primary hover:bg-slate-100'}`}
                         >
                             All Products
                         </button>
@@ -54,7 +55,7 @@ export default function ProductsPage() {
                             <button
                                 key={cat.id}
                                 onClick={() => setSelectedCategory(cat.id.toString())}
-                                className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition ${selectedCategory === cat.id.toString() ? 'bg-[#0f3d2e] text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+                                className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${selectedCategory === cat.id.toString() ? 'bg-primary text-white shadow-lg' : 'text-slate-500 hover:text-primary hover:bg-slate-100'}`}
                             >
                                 {cat.title}
                             </button>
@@ -63,31 +64,34 @@ export default function ProductsPage() {
                 </div>
 
                 {loading ? (
-                    <div className="text-center py-20">Loading products...</div>
+                    <div className="flex justify-center py-20">
+                        <div className="w-10 h-10 border-4 border-primary/30 border-t-primary rounded-full animate-spin"></div>
+                    </div>
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {filteredProducts.map(product => (
-                            <div key={product.id} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition border border-gray-100 flex flex-col">
-                                <div className="h-64 overflow-hidden relative group">
+                            <div key={product.id} className="bg-white rounded-2xl shadow-lg overflow-hidden border border-slate-100 hover:shadow-xl hover:border-primary/20 transition-all duration-300 group flex flex-col h-full card-hover">
+                                <div className="h-64 overflow-hidden relative">
                                     {product.imageUrl ? (
-                                        <img src={`http://localhost:8080/uploads/${product.imageUrl}`} alt={product.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                                        <img src={`http://localhost:8080/uploads/${encodeURIComponent(product.imageUrl)}`} alt={product.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                                     ) : (
-                                        <div className="w-full h-full bg-gray-200 flex items-center justify-center text-gray-500">No Image</div>
+                                        <div className="w-full h-full bg-slate-100 flex items-center justify-center text-slate-400">No Image</div>
                                     )}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                 </div>
                                 <div className="p-6 flex-grow flex flex-col">
-                                    <div className="mb-2">
-                                        <span className="text-xs uppercase tracking-wider font-semibold text-[#d4af37]">{product.category?.title}</span>
+                                    <div className="mb-3">
+                                        <span className="text-xs uppercase tracking-widest font-bold text-gold">{product.category?.title}</span>
                                     </div>
-                                    <h3 className="text-xl font-bold text-[#0f3d2e] mb-3">{product.title}</h3>
-                                    <p className="text-gray-600 text-sm line-clamp-3 mb-4 flex-grow">{product.description}</p>
+                                    <h3 className="text-xl font-serif font-bold text-slate-dark mb-3 group-hover:text-primary transition-colors">{product.title}</h3>
+                                    <p className="text-slate-500 text-sm line-clamp-3 mb-6 flex-grow leading-relaxed">{product.description}</p>
 
-                                    <div className="mt-auto pt-4 border-t border-gray-100 flex justify-between items-center">
-                                        <Link href="/contact" className="text-[#0f3d2e] font-semibold text-sm hover:text-[#d4af37] transition">
-                                            Enquire Now
+                                    <div className="mt-auto pt-5 border-t border-slate-100 flex justify-between items-center">
+                                        <Link href="/contact" className="text-primary font-semibold text-sm hover:text-primary-dark transition-colors flex items-center group/link">
+                                            Enquire Now <ChevronRight size={16} className="ml-1 group-hover/link:translate-x-1 transition-transform" />
                                         </Link>
                                         {product.pdfUrl && (
-                                            <a href={`http://localhost:8080/uploads/${product.pdfUrl}`} target="_blank" className="bg-gray-100 text-gray-700 px-3 py-1 rounded text-xs hover:bg-gray-200 transition">
+                                            <a href={`http://localhost:8080/uploads/${product.pdfUrl}`} target="_blank" className="bg-slate-50 text-slate-600 px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-slate-100 transition-colors">
                                                 Download PDF
                                             </a>
                                         )}
@@ -96,8 +100,8 @@ export default function ProductsPage() {
                             </div>
                         ))}
                         {filteredProducts.length === 0 && (
-                            <div className="col-span-3 text-center py-20 text-gray-500">
-                                No products found in this category.
+                            <div className="col-span-3 text-center py-20 text-slate-400 bg-white rounded-2xl border border-dashed border-slate-300">
+                                <p>No products found in this category.</p>
                             </div>
                         )}
                     </div>

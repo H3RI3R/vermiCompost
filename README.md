@@ -23,7 +23,7 @@ antigravity/
 ├── backend/          # Spring Boot REST API
 │   └── src/
 │       └── main/
-│           ├── java/com/eximroyals/
+│           ├── java/com/dndglobal/
 │           └── resources/
 └── frontend/         # Next.js application
     └── src/
