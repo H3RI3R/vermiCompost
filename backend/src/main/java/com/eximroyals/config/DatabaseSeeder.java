@@ -17,9 +17,9 @@ public class DatabaseSeeder {
             PasswordEncoder passwordEncoder) {
         return args -> {
             // Seed Admin
-            if (!adminRepository.existsByEmail("admin@eximroyals.com")) {
+            if (!adminRepository.existsByEmail("admin@dndglobal.com")) {
                 Admin admin = new Admin();
-                admin.setEmail("admin@eximroyals.com");
+                admin.setEmail("admin@dndglobal.com");
                 admin.setPassword(passwordEncoder.encode("Admin@123"));
                 adminRepository.save(admin);
                 System.out.println("Default Admin initialized");
